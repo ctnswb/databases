@@ -1,0 +1,79 @@
+---Create a MySQL Database from the interactive prompt---
+
+- start the server >
+mysql.server start
+
+- invoke prompt as root user >
+mysql -u root -p
+
+- create new database >
+CREATE DATABASE <database name>;
+
+- select database to use >
+USE <database name>;
+
+- create table >
+CREATE TABLE <table name> (<column names & value types>);
+
+- view tables >
+SHOW TABLES;
+
+- verify table setup >
+DESCRIBE <table-name>;
+
+- Insert rows into table >
+INSERT INTO firstTable VALUES (1, 'x','y');
+
+- Update
+UPDATE firstTable SET col1 = col1 + 2;
+
+
+------------------------------------------------------
+
+Run the schema:
+mysql -u root < server/schema.sql
+
+Run interactive prompt:
+mysql -u root -p
+
+Select database:
+USE chat;
+
+View tables in database:
+SHOW TABLES;
++----------------+
+| Tables_in_chat |
++----------------+
+| messages       |
+| rooms          |
+| users          |
++----------------+
+
+Verify tables were created correctly:
+DESCRIBE messages;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| id           | int(11)  | NO   | PRI | NULL    |       |
+| username     | int(11)  | YES  | MUL | NULL    |       |
+| message_body | text     | YES  |     | NULL    |       |
+| created_at   | datetime | YES  |     | NULL    |       |
+| room         | int(11)  | YES  | MUL | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+
+DESCRIBE rooms;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   | PRI | NULL    |       |
+| name  | text    | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+
+DESCRIBE users;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   | PRI | NULL    |       |
+| name  | text    | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+
