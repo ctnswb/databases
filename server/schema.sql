@@ -2,34 +2,25 @@ CREATE DATABASE chat;
 
 USE chat;
 
-CREATE TABLE messages (
-  objectId integer auto_increment primary key,
-  username text,
-  roomname text,
-  message_text text
+CREATE TABLE rooms (
+  id integer primary key,
+  name text
 );
 
+CREATE TABLE users (
+  id integer primary key,
+  name text
+);
 
--- CREATE TABLE rooms (
---   id integer primary key,
---   name text
--- );
-
--- CREATE TABLE users (
---   id integer primary key,
---   name text
--- );
-
--- CREATE TABLE messages (
---   id integer primary key,
---   username integer,
---   message_body text,
---   created_at datetime,
---   room integer,
---   FOREIGN KEY(username) REFERENCES users(id),
---   FOREIGN KEY(room) REFERENCES rooms(id)
--- );
-
+CREATE TABLE messages (
+  id integer primary key,
+  username integer,
+  message_body text,
+  created_at datetime,
+  room integer,
+  FOREIGN KEY(username) REFERENCES users(id),
+  FOREIGN KEY(room) REFERENCES rooms(id)
+);
 
 /* Create other tables and define schemas for them here! */
 

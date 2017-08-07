@@ -13,10 +13,11 @@ module.exports = {
     get: function (req, res) {
       res.set(headers);
       res.status(200);
-      // res.send( get the data  )
+    //  res.send( get the data  )
       res.end();
     }, // a function which handles a get request for all messages
     post: function (req, res) {
+      console.log('REQUEST BODY:', req.body);
       res.set(headers);
       res.status(201);
       models.messages.post(req.body);
@@ -37,4 +38,5 @@ module.exports = {
     }
   }
 };
+
 
