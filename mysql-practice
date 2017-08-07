@@ -1,3 +1,9 @@
+Useful Links:
+https://dev.mysql.com/doc/refman/5.7/en/select.html
+https://github.com/mysqljs/mysql
+http://expressjs.com/en/api.html
+http://ondras.zarovi.cz/sql/demo/
+
 ---Create a MySQL Database from the interactive prompt---
 
 - start the server >
