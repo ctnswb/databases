@@ -59,14 +59,17 @@ var app = {
     $.ajax({
       url: app.server,
       type: 'GET',
-      data: { order: '-createdAt' },
+      //data: { order: '-createdAt' },
       contentType: 'application/json',
       success: function(data) {
+
+        console.log('FETCHING;', data);
         // Don't bother if we have nothing to work with
         if (!data.results || !data.results.length) { app.stopSpinner(); return; }
 
         // Store messages for caching later
         app.messages = data.results;
+        console.log(data.results);
 
         // Get the last message
         var mostRecentMessage = data.results[data.results.length - 1];

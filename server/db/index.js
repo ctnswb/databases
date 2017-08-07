@@ -11,4 +11,4 @@ exports.dbConnection = mysql.createConnection({
   database: 'chat'
 });
 
-exports.dbConnection.connect();
+//exports.dbConnection.connect();

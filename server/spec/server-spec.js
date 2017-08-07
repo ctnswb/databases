@@ -40,7 +40,7 @@ describe('Persistent Node Chat Server', function() {
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
           username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
+          text: 'In mercy\'s name, three days is all I need.',
           roomname: 'Hello'
         }
       }, function () {
@@ -52,38 +52,51 @@ describe('Persistent Node Chat Server', function() {
         var queryString = 'SELECT * FROM messages';
         var queryArgs = [];
 
+        setTimeout(function(){
+
         dbConnection.query(queryString, queryArgs, function(err, results) {
+          // console.log('err:', err);
+          // console.log('results:', results);
+
           // Should have one result:
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
+          expect(results[0].message_text).to.equal('In mercy\'s name, three days is all I need.');
 
           done();
-        });
+        }); }, 500);
       });
-    });
+    })
   });
 
   it('Should output all messages from the DB', function(done) {
     // Let's insert a message into the db
-    var queryString = '';
+    var queryString = 'INSERT INTO messages (username, roomname, message_text) VALUES ("Valjean", "main", "Men like you can never change!")';
     var queryArgs = [];
     // TODO - The exact query string and query args to use
     // here depend on the schema you design, so I'll leave
     // them up to you. */
 
-    dbConnection.query(queryString, queryArgs, function(err) {
+    dbConnection.query(queryString, queryArgs, function(err, results) {
+      //console.log('query error:', err);
+     // console.log('query results:', results);
       if (err) { throw err; }
 
       // Now query the Node chat server and see if it returns
       // the message we just inserted:
-      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
-        var messageLog = JSON.parse(body);
-        expect(messageLog[0].text).to.equal('Men like you can never change!');
-        expect(messageLog[0].roomname).to.equal('main');
-        done();
-      });
+      setTimeout(function() {
+        request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+          console.log('error:', error);
+         // console.log('response:', response);
+          console.log('type:', typeof body);
+          console.log('body:', body);
+          var messageLog = JSON.parse(body);
+          expect(messageLog[0].message_text).to.equal('Men like you can never change!');
+          expect(messageLog[0].roomname).to.equal('main');
+          done();
+        });
+      }, 500);
     });
   });
 });

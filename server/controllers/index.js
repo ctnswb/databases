@@ -8,20 +8,24 @@ var headers = {
   'Content-Type': 'application/json'
 };
 
+//response function
+
+
 module.exports = {
   messages: {
     get: function (req, res) {
+      console.log('INSIDE THE CONTROLLER METHOD');
       res.set(headers);
       res.status(200);
-    //  res.send( get the data  )
-      res.end();
+      models.messages.get(req, res);
+      //res.send(models.messages.get());
+      //res.end();
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('REQUEST BODY:', req.body);
+      //console.log('REQUEST BODY:', req.body);
       res.set(headers);
       res.status(201);
       models.messages.post(req.body);
-
       res.end();
     } // a function which handles posting a message to the database
   },
@@ -30,7 +34,6 @@ module.exports = {
     // Ditto as above
     get: function (req, res) {},
     post: function (req, res) {
-      console.log('post to users URL:', req.originalUrl);
       res.set(headers);
       res.status(201);
       //add data to database
