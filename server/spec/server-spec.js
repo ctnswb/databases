@@ -52,22 +52,23 @@ describe('Persistent Node Chat Server', function() {
         var queryString = 'SELECT * FROM messages';
         var queryArgs = [];
 
-        setTimeout(function(){
+        setTimeout(function() {
 
-        dbConnection.query(queryString, queryArgs, function(err, results) {
+          dbConnection.query(queryString, queryArgs, function(err, results) {
           // console.log('err:', err);
           // console.log('results:', results);
 
           // Should have one result:
-          expect(results.length).to.equal(1);
+            expect(results.length).to.equal(1);
 
-          // TODO: If you don't have a column named text, change this test.
-          expect(results[0].message_text).to.equal('In mercy\'s name, three days is all I need.');
+            // TODO: If you don't have a column named text, change this test.
+            expect(results[0].message_text).to.equal('In mercy\'s name, three days is all I need.');
 
-          done();
-        }); }, 500);
+            done();
+          });
+        }, 500);
       });
-    })
+    });
   });
 
   it('Should output all messages from the DB', function(done) {
@@ -80,7 +81,7 @@ describe('Persistent Node Chat Server', function() {
 
     dbConnection.query(queryString, queryArgs, function(err, results) {
       //console.log('query error:', err);
-     // console.log('query results:', results);
+      // console.log('query results:', results);
       if (err) { throw err; }
 
       // Now query the Node chat server and see if it returns
@@ -88,7 +89,7 @@ describe('Persistent Node Chat Server', function() {
       setTimeout(function() {
         request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
           console.log('error:', error);
-         // console.log('response:', response);
+          // console.log('response:', response);
           console.log('type:', typeof body);
           console.log('body:', body);
           var messageLog = JSON.parse(body);

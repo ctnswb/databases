@@ -3,20 +3,20 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (req, res) {
-     db.dbConnection.query('SELECT * FROM messages', function (err, results) {
+      db.dbConnection.query('SELECT * FROM messages', function (err, results) {
         console.log('RESULTS: ', results);
         console.log('RESULTS TYPE: ', typeof results);
         body = JSON.stringify(results);
 
         //refactor later
-         res.send(body);
-         res.end();
+        res.send(body);
+        res.end();
       });
 
     }, // a function which produces all the messages
     post: function (message) {
       //console.log('Message:', message);
-      db.dbConnection.query('INSERT INTO messages (username, roomname, message_text) VALUES ("'+message.username+'", "'+message.roomname+'", "'+message.text+'")', function(err, results){
+      db.dbConnection.query('INSERT INTO messages (username, roomname, message_text) VALUES ("' + message.username + '", "' + message.roomname + '", "' + message.text + '")', function(err, results) {
         //console.log('error:', err);
         //console.log('results:', results);
       });
